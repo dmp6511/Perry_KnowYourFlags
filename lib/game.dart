@@ -286,7 +286,7 @@ class _GamePageState extends State<GamePage> {
                 ),
               );
             },
-            child: const Text('Game over!'),
+            child: const Text('End Game'),
           ),
 
         ],

@@ -39,7 +39,7 @@ class _GameOverPageState extends State<GameOverPage> {
           gradient: LinearGradient(
             begin: Alignment.bottomCenter,
             end: Alignment.topCenter,
-            colors: [Colors.yellowAccent, Colors.white],
+            colors: [Colors.greenAccent, Colors.white],
           ),
         ),
         child: Column(
@@ -47,12 +47,12 @@ class _GameOverPageState extends State<GameOverPage> {
           children: [
             Container(
               alignment: Alignment.center,
-              height: 100,
+              height: 150,
               child: Text(
                 "Game Over! \n",
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 30.0,
+                  fontSize: 40.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -89,6 +89,8 @@ class _GameOverPageState extends State<GameOverPage> {
                 ],
               ),
             ),
+
+            SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -110,9 +112,39 @@ class _GameOverPageState extends State<GameOverPage> {
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                primary: Colors.redAccent,
+                padding: EdgeInsets.all(20),
+                backgroundColor: Colors.redAccent,
+                side: BorderSide(
+                  color: Colors.black,
+                  width: 5.0,
+                ),
               ),
             ),
+
+            SizedBox(height: 10),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                'Main Menu',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.all(20),
+                backgroundColor: Colors.redAccent,
+                side: BorderSide(
+                  color: Colors.black,
+                  width: 5.0,
+                ),
+              ),
+            ),
+            
           ],
         ),
       ),
