@@ -42,6 +42,15 @@ class _GamePageState extends State<GamePage> {
   late Timer gameTimer;
   int timeLeft = 10;
 
+  // check the game speed (if enabled, reduce the time to 5 seconds)
+  @override
+  void initState() {
+    super.initState();
+    if (widget.gameSpeed == false) {
+      timeLeft = 5;
+    }
+  }
+
   // timer function
   void startTimer() {
     gameTimer = Timer.periodic(
@@ -76,11 +85,31 @@ class _GamePageState extends State<GamePage> {
         ),
         backgroundColor: Colors.redAccent,
       ),
-      body: Column(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
+            colors: [Colors.yellowAccent, Colors.white],
+          ),
+        ),
+      child: Column(
         children: [
+
+          SizedBox(height: 20),
 
           // start game button
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.all(20),
+              alignment: Alignment.center,
+              side: BorderSide(
+                color: Colors.black,
+                width: 5.0,
+              ),
+              backgroundColor: Colors.redAccent,
+              foregroundColor: Colors.black,
+            ),
             onPressed: () async {
 
               // snackbar to show the user that the game has started
@@ -229,8 +258,8 @@ class _GamePageState extends State<GamePage> {
                               options = [];
 
                               // reset the score and lives
-                              guesses = 3; // reset the attempts
-                              score = 0; // reset the score
+                              guesses = 3;
+                              score = 0;
 
                               // navigate to the game over page
                               Navigator.push(
@@ -275,6 +304,16 @@ class _GamePageState extends State<GamePage> {
 
           // test button
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.all(20),
+              alignment: Alignment.center,
+              side: BorderSide(
+                color: Colors.black,
+                width: 5.0,
+              ),
+              backgroundColor: Colors.redAccent,
+              foregroundColor: Colors.black,
+            ),
             onPressed: () {
               Navigator.push(
                 context,
@@ -291,6 +330,7 @@ class _GamePageState extends State<GamePage> {
 
         ],
       ),
+    ),
     );
   }
 }

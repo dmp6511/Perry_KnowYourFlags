@@ -287,7 +287,7 @@ class _HomePageState extends State<HomePage> {
                   'OPTIONS',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 30.0,
+                    fontSize: 25.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
