@@ -3,6 +3,7 @@
 // imports
 import 'package:flutter/material.dart';
 import 'game.dart';
+import 'main.dart';
 
 // globals
 
@@ -123,9 +124,15 @@ class _GameOverPageState extends State<GameOverPage> {
 
             SizedBox(height: 10),
 
+            // main menu button
             ElevatedButton(
               onPressed: () {
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomePage(),
+                  ),
+                );
               },
               child: Text(
                 'Main Menu',
