@@ -6,6 +6,7 @@ import 'dart:math';
 import 'dart:convert';
 import 'dart:async';
 import 'gameOver.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 // API deets
 const apiKey = 'D2HmoXMmuwKZMo8IGG9I5N2Q4HVKjKWWzX1pUbKi';
@@ -24,6 +25,10 @@ List<Map<String, dynamic>> otherCountries = [];
 List<Map<String, dynamic>> options = [];
 int score = 0;
 int guesses = 3;
+
+// audio player
+final player = AudioPlayer();
+
 
 class GamePage extends StatefulWidget {
   // game modes
@@ -200,6 +205,10 @@ class _GamePageState extends State<GamePage> {
                             ),
                           );
 
+                          // play a sound
+                          // player.setAsset('family-feud-good-answer.mp3');
+                          // player.play();
+
 
                           // add a point
                           setState(() {
@@ -231,6 +240,11 @@ class _GamePageState extends State<GamePage> {
                               duration: Duration(seconds: 2),
                             ),
                           );
+
+                          // play the wrong answer sound
+                          // player.setAsset('family-feud-wrong-answer.mp3');
+                          // player.play();
+
 
                           // subtract a point
                           setState(() {
