@@ -29,7 +29,6 @@ int guesses = 3;
 // audio player
 final player = AudioPlayer();
 
-
 class GamePage extends StatefulWidget {
   // game modes
   final bool flagMode;
@@ -98,253 +97,250 @@ class _GamePageState extends State<GamePage> {
             colors: [Colors.yellowAccent, Colors.white],
           ),
         ),
-      child: Column(
-        children: [
+        child: Column(
+          children: [
+            SizedBox(height: 20),
 
-          SizedBox(height: 20),
-
-          // start game button
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.all(20),
-              alignment: Alignment.center,
-              side: BorderSide(
-                color: Colors.black,
-                width: 5.0,
-              ),
-              backgroundColor: Colors.redAccent,
-              foregroundColor: Colors.black,
-            ),
-            onPressed: () async {
-
-              // snackbar to show the user that the game has started
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Game Started!'),
-                  duration: Duration(seconds: 2),
+            // start game button
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.all(20),
+                alignment: Alignment.center,
+                side: BorderSide(
+                  color: Colors.black,
+                  width: 5.0,
                 ),
-              );
+                backgroundColor: Colors.redAccent,
+                foregroundColor: Colors.black,
+              ),
+              onPressed: () async {
+                // snackbar to show the user that the game has started
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Game Started!'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
 
-              // reset the score and lives
-              score = 0;
-              guesses = 3;
+                // reset the score and lives
+                score = 0;
+                guesses = 3;
 
-              // get a random country (the correct answer)
-              randomCountry = await getRandomCountry();
+                // get a random country (the correct answer)
+                randomCountry = await getRandomCountry();
 
-              // get other countries (the wrong answers)
-              otherCountries = await Future.wait([
-                getRandomCountry(),
-                getRandomCountry(),
-                getRandomCountry(),
-              ]);
+                // get other countries (the wrong answers)
+                otherCountries = await Future.wait([
+                  getRandomCountry(),
+                  getRandomCountry(),
+                  getRandomCountry(),
+                ]);
 
-              // gather all the countries and shuffle them
-              options = [randomCountry, ...otherCountries];
-              options.shuffle();
+                // gather all the countries and shuffle them
+                options = [randomCountry, ...otherCountries];
+                options.shuffle();
 
-              // start the timer
-              startTimer();
+                // start the timer
+                startTimer();
 
-              // update the UI
-              setState(() {});
-            },
-            child: const Text('Start Game'),
-          ),
+                // update the UI
+                setState(() {});
+              },
+              child: const Text('Start Game'),
+            ),
 
-          const SizedBox(height: 60),
+            const SizedBox(height: 60),
 
-
-          // timer
-          Text('Time: $timeLeft',
+            // timer
+            Text(
+              'Time: $timeLeft',
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 30.0,
                 fontWeight: FontWeight.bold,
               ),
-          ),
-
-         // if the flag mode is enabled, show the flag image and ask the user to guess the country
-          if (widget.flagMode == true &&
-              randomCountry != null &&
-              randomCountry['flag'] != null)
-            Image.network(
-              randomCountry['flag']['medium'],
             ),
 
-          const SizedBox(height: 20),
+            // if the flag mode is enabled, show the flag image and ask the user to guess the country
+            if (widget.flagMode == true &&
+                randomCountry != null &&
+                randomCountry['flag'] != null)
+              Image.network(
+                randomCountry['flag']['medium'],
+              ),
 
-          // options to choose from
-          if (options != null)
-            Expanded(
-              child: ListView.builder(
-                  itemCount: options.length,
-                  itemBuilder: (context, index) {
-                    var country = options[index];
-                    return ListTile(
-                      title: Text(country['name']),
-                      trailing: Icon(Icons.question_answer),
-                      mouseCursor: MaterialStateMouseCursor.clickable,
-                      hoverColor: Colors.redAccent,
-                      selectedTileColor: Colors.greenAccent,
-                      minVerticalPadding: 20,
-                      enableFeedback: true,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      onTap: () async {
-                        // check if the selected country is the correct answer
-                        if (country['name'] == randomCountry['name']) {
-                          // print('Correct!');
+            const SizedBox(height: 20),
 
-                          // show a snackbar message
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Correct!'),
-                              duration: Duration(seconds: 2),
-                            ),
-                          );
+            // options to choose from
+            if (options != null)
+              Expanded(
+                child: ListView.builder(
+                    itemCount: options.length,
+                    itemBuilder: (context, index) {
+                      var country = options[index];
+                      return ListTile(
+                        title: Text(country['name']),
+                        trailing: Icon(Icons.question_answer),
+                        mouseCursor: MaterialStateMouseCursor.clickable,
+                        hoverColor: Colors.redAccent,
+                        selectedTileColor: Colors.greenAccent,
+                        minVerticalPadding: 20,
+                        enableFeedback: true,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        onTap: () async {
+                          // check if the selected country is the correct answer
+                          if (country['name'] == randomCountry['name']) {
+                            // print('Correct!');
 
-                          // play a sound
-                          // player.setAsset('family-feud-good-answer.mp3');
-                          // player.play();
+                            // show a snackbar message
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Correct!'),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
 
+                            // play a sound
+                            // player.setAsset('family-feud-good-answer.mp3');
+                            // player.play();
 
-                          // add a point
-                          setState(() {
-                            score++;
-                          });
+                            // add a point
+                            setState(() {
+                              score++;
+                            });
 
-                          // fetch the next question
-                          randomCountry = await getRandomCountry();
-                          otherCountries = await Future.wait([
-                            getRandomCountry(),
-                            getRandomCountry(),
-                            getRandomCountry(),
-                          ]);
-                          options = [randomCountry, ...otherCountries];
-                          options.shuffle();
+                            // fetch the next question
+                            randomCountry = await getRandomCountry();
+                            otherCountries = await Future.wait([
+                              getRandomCountry(),
+                              getRandomCountry(),
+                              getRandomCountry(),
+                            ]);
+                            options = [randomCountry, ...otherCountries];
+                            options.shuffle();
 
-                          // reset the timer
-                          timeLeft = 10;
+                            // reset the timer
+                            timeLeft = 10;
+
+                            // update the UI
+                            setState(() {});
+                          } else {
+                            // print('Incorrect!');
+
+                            // show a snackbar message
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Incorrect!'),
+                                duration: Duration(seconds: 2),
+                              ),
+                            );
+
+                            // play the wrong answer sound
+                            // player.setAsset('family-feud-wrong-answer.mp3');
+                            // player.play();
+
+                            // subtract a point
+                            setState(() {
+                              guesses--;
+
+                              // end the game if the player runs out of lives or time
+                              if (guesses < 1 || timeLeft < 1) {
+                                gameTimer.cancel();
+
+                                // grab final score and guesses left
+                                var finalScore = score;
+                                var guessesLeft = guesses;
+
+                                // game over message
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Game Over!'),
+                                    duration: Duration(seconds: 2),
+                                  ),
+                                );
+
+                                // get rid of the flags and options
+                                randomCountry = {};
+                                otherCountries = [];
+                                options = [];
+
+                                // reset the score and lives
+                                guesses = 3;
+                                score = 0;
+
+                                // navigate to the game over page
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => GameOverPage(
+                                      finalScore: finalScore,
+                                      guessesLeft: guessesLeft,
+                                    ),
+                                  ),
+                                );
+                              }
+                            });
+                          }
 
                           // update the UI
                           setState(() {});
-                        } else {
-                          // print('Incorrect!');
+                        },
+                      );
+                    }),
+              ), // expanded
 
-                          // show a snackbar message
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Incorrect!'),
-                              duration: Duration(seconds: 2),
-                            ),
-                          );
-
-                          // play the wrong answer sound
-                          // player.setAsset('family-feud-wrong-answer.mp3');
-                          // player.play();
-
-
-                          // subtract a point
-                          setState(() {
-                            guesses--;
-
-                            // end the game if the player runs out of lives or time
-                            if (guesses < 1 || timeLeft < 1) {
-                              gameTimer.cancel();
-
-                              // grab final score and guesses left
-                              var finalScore = score;
-                              var guessesLeft = guesses;
-
-                              // game over message
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Game Over!'),
-                                  duration: Duration(seconds: 2),
-                                ),
-                              );
-
-                              // get rid of the flags and options
-                              randomCountry = {};
-                              otherCountries = [];
-                              options = [];
-
-                              // reset the score and lives
-                              guesses = 3;
-                              score = 0;
-
-                              // navigate to the game over page
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => GameOverPage(
-                                    finalScore: finalScore,
-                                    guessesLeft: guessesLeft,
-                                  ),
-                                ),
-                              );
-                            }
-                          });
-                        }
-
-                        // update the UI
-                        setState(() {});
-                      },
-                    );
-                  }),
-            ), // expanded
-
-                        // score
-          Text('Score: $score',
+            // score
+            Text(
+              'Score: $score',
               style: const TextStyle(
                 color: Colors.black,
                 fontSize: 30.0,
                 fontWeight: FontWeight.bold,
               ),
-          ),
-
-                    // attempts
-          Text('Guesses left: $guesses',
-              style: const TextStyle(
-                color: Colors.black,
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold,
-              ),
-          ),
-
-          const SizedBox(height: 20),
-
-          // test button
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.all(20),
-              alignment: Alignment.center,
-              side: BorderSide(
-                color: Colors.black,
-                width: 5.0,
-              ),
-              backgroundColor: Colors.redAccent,
-              foregroundColor: Colors.black,
             ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => GameOverPage(
-                    finalScore: score,
-                    guessesLeft: guesses,
-                  ),
-                ),
-              );
-            },
-            child: const Text('End Game'),
-          ),
 
-        ],
+            // attempts
+            Text(
+              'Guesses left: $guesses',
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 30.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            // test button
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                padding: EdgeInsets.all(20),
+                alignment: Alignment.center,
+                side: BorderSide(
+                  color: Colors.black,
+                  width: 5.0,
+                ),
+                backgroundColor: Colors.redAccent,
+                foregroundColor: Colors.black,
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => GameOverPage(
+                      finalScore: score,
+                      guessesLeft: guesses,
+                    ),
+                  ),
+                );
+              },
+              child: const Text('End Game'),
+            ),
+          ],
+        ),
       ),
-    ),
     );
   }
 }

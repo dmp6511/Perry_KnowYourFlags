@@ -1,4 +1,4 @@
-// Game over screen 
+// Game over screen
 
 // imports
 import 'package:flutter/material.dart';
@@ -6,7 +6,6 @@ import 'game.dart';
 import 'main.dart';
 
 // globals
-
 
 // building the game over page
 class GameOverPage extends StatefulWidget {
@@ -151,7 +150,6 @@ class _GameOverPageState extends State<GameOverPage> {
                 ),
               ),
             ),
-            
           ],
         ),
       ),

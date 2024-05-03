@@ -51,22 +51,22 @@ class _LearnPageState extends State<LearnPage> {
                   ),
                 ),
               ),
-              // gif 
-                    Container(
-                      padding: EdgeInsets.all(8),
-                      height: 200,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                          color: Colors.black,
-                          width: 5.0,
-                        ),
-                      ),
-                      child: Image.network(
-                        "https://media0.giphy.com/media/WoWm8YzFQJg5i/200w.gif?cid=6c09b9521hoyiph5t0rfoz1hjmetco7clk3l1a7czmw8s14o&ep=v1_gifs_search&rid=200w.gif&ct=g)",
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+              // gif
+              Container(
+                padding: EdgeInsets.all(8),
+                height: 200,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 5.0,
+                  ),
+                ),
+                child: Image.network(
+                  "https://media0.giphy.com/media/WoWm8YzFQJg5i/200w.gif?cid=6c09b9521hoyiph5t0rfoz1hjmetco7clk3l1a7czmw8s14o&ep=v1_gifs_search&rid=200w.gif&ct=g)",
+                  fit: BoxFit.cover,
+                ),
+              ),
 
               SizedBox(height: 10),
               Container(
@@ -197,10 +197,7 @@ class _LearnPageState extends State<LearnPage> {
                         ),
                       ),
                     ),
-
                     SizedBox(height: 10),
-
-
                   ],
                 ),
               ),
