@@ -71,7 +71,7 @@ class _GameOverPageState extends State<GameOverPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Final Score: $score",
+                    "Final Score: ${widget.finalScore}",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 20.0,
@@ -79,7 +79,7 @@ class _GameOverPageState extends State<GameOverPage> {
                     ),
                   ),
                   Text(
-                    "Guesses Left: $guesses",
+                    "Guesses Left: ${widget.guessesLeft}",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 20.0,

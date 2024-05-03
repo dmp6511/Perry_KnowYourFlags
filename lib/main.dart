@@ -172,19 +172,9 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
 
-              // game description
-              Container(
-                height: 100,
-                width: 200,
-                child: Text(
-                  'Test your world knowledge here!',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
+              // spacing
+              SizedBox(height: 35),
+
 
               MouseRegion(
                 onEnter: (event) {
