@@ -90,6 +90,7 @@ class _HomePageState extends State<HomePage> {
                       TextButton(
                         onPressed: () {
                           // launch the documentation URL
+                          launch('https://docs.google.com/document/d/e/2PACX-1vST73WXfNUBrnbny5CV1VZZBJ0dpt83JmB5_DJvU1BC-Bs6DMV1n01rt69c-g_z4Y6fmEKb8pq7CDMw/pub');
                         },
                         child: const Text('Documentation'),
                       ),
