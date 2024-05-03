@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'dart:math';
 import 'dart:convert';
 import 'dart:async';
+import 'gameOver.dart';
 
 // API deets
 const apiKey = 'D2HmoXMmuwKZMo8IGG9I5N2Q4HVKjKWWzX1pUbKi';
@@ -77,16 +78,6 @@ class _GamePageState extends State<GamePage> {
       ),
       body: Column(
         children: [
-          const Text(
-            'Game',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 30.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 20),
-
 
           // start game button
           ElevatedButton(
@@ -220,8 +211,9 @@ class _GamePageState extends State<GamePage> {
                             if (guesses < 1 || timeLeft < 1) {
                               gameTimer.cancel();
 
-                              // grab final score
+                              // grab final score and guesses left
                               var finalScore = score;
+                              var guessesLeft = guesses;
 
                               // game over message
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -239,6 +231,17 @@ class _GamePageState extends State<GamePage> {
                               // reset the score and lives
                               guesses = 3; // reset the attempts
                               score = 0; // reset the score
+
+                              // navigate to the game over page
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => GameOverPage(
+                                    finalScore: finalScore,
+                                    guessesLeft: guessesLeft,
+                                  ),
+                                ),
+                              );
                             }
                           });
                         }
@@ -269,6 +272,22 @@ class _GamePageState extends State<GamePage> {
           ),
 
           const SizedBox(height: 20),
+
+          // test button
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => GameOverPage(
+                    finalScore: score,
+                    guessesLeft: guesses,
+                  ),
+                ),
+              );
+            },
+            child: const Text('Game over!'),
+          ),
 
         ],
       ),

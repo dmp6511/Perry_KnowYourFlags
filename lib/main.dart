@@ -133,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                       end: Alignment.topCenter,
                     ),
                     border: Border.all(
-                      width: 5.0,
+                      width: 0.0,
                       color: Colors.black,
                     ),
                   ),
@@ -157,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                     end: Alignment.bottomCenter,
                   ),
                   border: Border.all(
-                    width: 5.0,
+                    width: 1.0,
                     color: Colors.black,
                   ),
                 ),
